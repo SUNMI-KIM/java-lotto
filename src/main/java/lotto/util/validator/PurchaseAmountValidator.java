@@ -2,8 +2,6 @@ package lotto.util.validator;
 
 public class PurchaseAmountValidator extends NumberValidator {
 
-    private static final String NUMBER_REGEX = "\\d+";
-
     private static final int UNIT = 1000;
     private static final int MIN = 1000;
     private static final int MAX = 100000;
