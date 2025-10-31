@@ -6,8 +6,8 @@ import java.util.Set;
 
 public class WinningNumberValidator {
 
-    private static final int MIN = 1000;
-    private static final int MAX = 100000;
+    private static final int MIN = 1;
+    private static final int MAX = 45;
 
     private final NumberValidator numberValidator;
 

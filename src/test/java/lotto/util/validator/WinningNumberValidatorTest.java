@@ -13,21 +13,21 @@ public class WinningNumberValidatorTest {
 
     @Test
     void 중복된_숫자가_존재하면_예외가_발생한다() {
-        List<Integer> numbers = List.of(1000, 2000, 3000, 4000, 5000, 1000);
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 5);
 
         assertThrows(IllegalArgumentException.class, () -> winningNumberValidator.validate(numbers));
     }
 
     @Test
     void 숫자_중_하나라도_범위를_벗어나면_예외가_발생한다() {
-        List<Integer> numbers = List.of(999, 2000, 3000, 4000, 5000, 6000);
+        List<Integer> numbers = List.of(-1, 1, 2, 3, 4, 5);
 
         assertThrows(IllegalArgumentException.class, () -> winningNumberValidator.validate(numbers));
     }
 
     @Test
     void 모든_숫자가_범위_내이고_중복이_없으면_예외가_발생하지_않는다() {
-        List<Integer> numbers = List.of(1000, 2000, 3000, 4000, 5000, 6000);
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
 
         assertDoesNotThrow(() -> winningNumberValidator.validate(numbers));
     }
