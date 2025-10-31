@@ -4,14 +4,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class WinningNumberValidator {
+public class LottoValidator {
 
     private static final int MIN = 1;
     private static final int MAX = 45;
 
     private final NumberValidator numberValidator;
 
-    public WinningNumberValidator(NumberValidator numberValidator) {
+    public LottoValidator(NumberValidator numberValidator) {
         this.numberValidator = numberValidator;
     }
 
