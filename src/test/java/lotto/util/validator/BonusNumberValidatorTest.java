@@ -11,46 +11,24 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class BonusNumberValidatorTest {
 
-    Validator validator;
+    NumberValidator numberValidator = new NumberValidator();
+    BonusNumberValidator bonusNumberValidator = new BonusNumberValidator(numberValidator);
 
-    @BeforeEach
-    void setUp() {
-        validator = new BonusNumberValidator();
+    @ParameterizedTest
+    @ValueSource(ints = {-1, -2, -3})
+    void 음수면_예외가_발생한다(int input) {
+        assertThrows(IllegalArgumentException.class, () -> bonusNumberValidator.validate(input));
     }
 
     @ParameterizedTest
-    @NullAndEmptySource
-    void 입력이_비어있거나_null이면_예외가_발생한다(String input) {
-        assertThrows(IllegalArgumentException.class, () -> validator.validate(input));
+    @ValueSource(ints = {0, 46})
+    void 로또_범위를_초과하면_예외가_발생한다(int input) {
+        assertThrows(IllegalArgumentException.class, () -> bonusNumberValidator.validate(input));
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"-1", "-100", "-9999"})
-    void 음수면_예외가_발생한다(String input) {
-        assertThrows(IllegalArgumentException.class, () -> validator.validate(input));
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"a", "1a", ".", "+", ";"})
-    void 숫자가_아니면_예외가_발생한다(String input) {
-        assertThrows(IllegalArgumentException.class, () -> validator.validate(input));
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"9999999999", "2147483648"})
-    void int_범위를_초과하면_예외가_발생한다(String input) {
-        assertThrows(IllegalArgumentException.class, () -> validator.validate(input));
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"0", "46"})
-    void 로또_범위를_초과하면_예외가_발생한다(String input) {
-        assertThrows(IllegalArgumentException.class, () -> validator.validate(input));
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"1", "15", "45"})
-    void 정상적인_입력이면_예외가_발생하지_않는다(String input) {
-        assertDoesNotThrow(() -> validator.validate(input));
+    @ValueSource(ints = {1, 2, 3, 44, 45})
+    void 정상적인_입력이면_예외가_발생하지_않는다(int input) {
+        assertDoesNotThrow(() -> bonusNumberValidator.validate(input));
     }
 }
