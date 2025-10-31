@@ -1,15 +1,17 @@
 package lotto.util.validator;
 
-public class BonusNumberValidator extends NumberValidator{
+public class BonusNumberValidator {
 
     private static final int MIN = 1;
     private static final int MAX = 45;
 
-    @Override
-    public void validate(String input) {
-        validateNotBlank(input);
-        validateNumeric(input);
-        int bonusNumber = parseAndValidateRange(input);
-        validateRange(bonusNumber, MIN, MAX);
+    private final NumberValidator numberValidator;
+
+    public BonusNumberValidator(NumberValidator numberValidator) {
+        this.numberValidator = numberValidator;
+    }
+
+    public void validate(int bonusNumber) {
+        numberValidator.validateRange(bonusNumber, MIN, MAX);
     }
 }
