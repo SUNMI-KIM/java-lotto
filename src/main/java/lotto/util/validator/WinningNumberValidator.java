@@ -16,6 +16,7 @@ public class WinningNumberValidator {
     }
 
     public void validate(List<Integer> numbers) {
+        validateSize(numbers);
         validateDuplicate(numbers);
         validateRangeForAll(numbers);
     }
@@ -30,6 +31,12 @@ public class WinningNumberValidator {
     private void validateRangeForAll(List<Integer> numbers) {
         for (int number : numbers) {
             numberValidator.validateRange(number, MIN, MAX);
+        }
+    }
+
+    private void validateSize(List<Integer> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException(/* INVALID_WINNING_NUMBER_SIZE.getMessage() */);
         }
     }
 }

@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class WinningNumberValidatorTest {
 
@@ -25,6 +28,12 @@ public class WinningNumberValidatorTest {
         assertThrows(IllegalArgumentException.class, () -> winningNumberValidator.validate(numbers));
     }
 
+    @ParameterizedTest
+    @MethodSource("inputProvider")
+    void 리스트의_인자_개수가_6개가_아니면_예외가_발생한다(List<Integer> numbers) {
+        assertThrows(IllegalArgumentException.class, () -> winningNumberValidator.validate(numbers));
+    }
+
     @Test
     void 모든_숫자가_범위_내이고_중복이_없으면_예외가_발생하지_않는다() {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
@@ -33,9 +42,16 @@ public class WinningNumberValidatorTest {
     }
 
     @Test
-    void 빈_리스트가_주어지면_예외가_발생하지_않는다() {
+    void 빈_리스트가_주어지면_예외가_발생한다() {
         List<Integer> numbers = List.of();
 
-        assertDoesNotThrow(() -> winningNumberValidator.validate(numbers));
+        assertThrows(IllegalArgumentException.class, () -> winningNumberValidator.validate(numbers));
+    }
+
+    private static Stream<List<Integer>> inputProvider() {
+        return Stream.of(
+                List.of(1, 2, 3, 4, 5, 6, 7),
+                List.of(1, 2, 3, 4, 5)
+        );
     }
 }
