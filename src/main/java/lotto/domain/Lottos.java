@@ -21,6 +21,12 @@ public class Lottos implements Iterable<Lotto> {
                 .toList();
     }
 
+    public List<Boolean> countAllNumberMatches(LottoNumber lottoNumber) {
+        return lottos.stream()
+                .map(lotto -> lotto.contains(lottoNumber))
+                .toList();
+    }
+
     @Override
     public Iterator<Lotto> iterator() {
         return lottos.iterator();
