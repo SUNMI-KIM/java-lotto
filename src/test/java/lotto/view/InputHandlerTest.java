@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import lotto.config.LottoConfig;
+import lotto.domain.Lotto;
 import lotto.view.handler.InputHandler;
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +17,8 @@ class InputHandlerTest extends NsTest {
         InputHandler inputHandler = config.inputHandler();
 
         inputHandler.readPurchaseAmount();
-        inputHandler.readWinningNumbers();
-        inputHandler.readBonusNumber();
+        Lotto lotto = inputHandler.readWinningNumbers();
+        inputHandler.readBonusNumber(lotto);
     }
 
     @Test
@@ -63,6 +64,18 @@ class InputHandlerTest extends NsTest {
     void 보너스번호_입력_예외_흐름() {
         assertSimpleTest(() -> {
             run("8000", "1,2,3,4,5,6", "abc", "7");
+
+            assertThat(output()).contains(
+                    "보너스 번호를 입력해 주세요.",
+                    "보너스 번호를 입력해 주세요."
+            );
+        });
+    }
+
+    @Test
+    void 보너스번호_입력_중복_예외_흐름() {
+        assertSimpleTest(() -> {
+            run("8000", "1,2,3,4,5,6", "5", "7");
 
             assertThat(output()).contains(
                     "보너스 번호를 입력해 주세요.",

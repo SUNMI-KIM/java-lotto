@@ -82,4 +82,19 @@ public class LottoControllerTest extends NsTest {
             );
         });
     }
+
+    @Test
+    void 보너스번호_입력_중복_예외_테스트() {
+        assertSimpleTest(() -> {
+            run("8000", "1,2,3,4,5,6", "5", "7");
+
+            assertThat(output()).contains(
+                    "보너스 번호를 입력해 주세요.",
+                    ERROR_MESSAGE,
+                    "보너스 번호를 입력해 주세요.",
+                    "당첨 통계",
+                    "총 수익률은"
+            );
+        });
+    }
 }

@@ -8,6 +8,7 @@ import lotto.domain.factory.LottoFactory;
 import lotto.domain.factory.LottoNumberFactory;
 import lotto.domain.factory.PurchaseAmountFactory;
 import lotto.util.parser.InputParser;
+import lotto.util.validator.BonusNumberValidator;
 import lotto.view.InputView;
 
 
@@ -49,12 +50,14 @@ public class InputHandler {
         }
     }
 
-    public LottoNumber readBonusNumber() {
+    public LottoNumber readBonusNumber(Lotto lotto) {
         while (true) {
             try {
                 String input = InputView.inputBonusNumber();
                 int number = InputParser.parseToInt(input);
-                return lottoNumberFactory.create(number);
+                LottoNumber lottoNumber = lottoNumberFactory.create(number);
+                BonusNumberValidator.validate(lotto, lottoNumber);
+                return lottoNumber;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

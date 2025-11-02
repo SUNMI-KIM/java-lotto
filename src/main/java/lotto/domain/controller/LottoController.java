@@ -27,7 +27,7 @@ public class LottoController {
         OutputView.printPurchasedLottos(purchaseAmount.getLottoCount(), lottos);
 
         Lotto lotto = inputHandler.readWinningNumbers();
-        LottoNumber lottoNumber = inputHandler.readBonusNumber();
+        LottoNumber lottoNumber = inputHandler.readBonusNumber(lotto);
 
         Map<Rank, Long> countRanks = lottoService.calculateRanks(lottos, lotto, lottoNumber);
         double profit = lottoService.calculateProfitPurchaseAmount(purchaseAmount, countRanks);
