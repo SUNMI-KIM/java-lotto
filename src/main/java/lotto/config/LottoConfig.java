@@ -1,5 +1,6 @@
 package lotto.config;
 
+import lotto.domain.controller.LottoController;
 import lotto.domain.factory.LottoFactory;
 import lotto.domain.factory.LottoNumberFactory;
 import lotto.domain.factory.PurchaseAmountFactory;
@@ -13,6 +14,10 @@ import lotto.util.validator.PurchaseAmountValidator;
 import lotto.view.handler.InputHandler;
 
 public class LottoConfig {
+
+    public LottoController lottoController() {
+        return new LottoController(lottoService(), inputHandler());
+    }
 
     public InputHandler inputHandler() {
         return new InputHandler(purchaseAmountFactory(), lottoFactory(), lottoNumberFactory());
