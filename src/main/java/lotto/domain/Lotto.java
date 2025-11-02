@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
-public class Lotto implements Iterable<LottoNumber> {
+public class Lotto {
     private final List<LottoNumber> numbers;
 
     private Lotto(List<LottoNumber> numbers) {
@@ -24,8 +24,8 @@ public class Lotto implements Iterable<LottoNumber> {
                 .count();
     }
 
-    @Override
-    public Iterator<LottoNumber> iterator() {
-        return numbers.iterator();
+    public Stream<LottoNumber> stream() {
+        return numbers.stream();
     }
+
 }

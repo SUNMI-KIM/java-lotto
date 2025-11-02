@@ -37,7 +37,7 @@ public class LottoServiceTest {
 
         Lottos lottos = lottoService.purchaseLottos(purchaseAmount);
 
-        assertThat(lottos).hasSize(3);
+        assertThat(lottos.stream().toList().size()).isEqualTo(3);
     }
 
     @Test
