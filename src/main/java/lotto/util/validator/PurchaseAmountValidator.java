@@ -1,5 +1,7 @@
 package lotto.util.validator;
 
+import static lotto.util.exception.ErrorMessage.INVALID_UNIT;
+
 public class PurchaseAmountValidator {
 
     private static final int UNIT = 1000;
@@ -19,7 +21,7 @@ public class PurchaseAmountValidator {
 
     public void validateUnit(int purchaseAmount) {
         if (purchaseAmount % UNIT != 0) {
-            throw new IllegalArgumentException(/* ErrorMessage.INVALID_UNIT.getMessage() */);
+            throw new IllegalArgumentException(INVALID_UNIT.getMessage());
         }
     }
 }

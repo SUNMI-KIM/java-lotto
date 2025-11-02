@@ -1,5 +1,8 @@
 package lotto.util.validator;
 
+import static lotto.util.exception.ErrorMessage.DUPLICATE_WINNING_NUMBER;
+import static lotto.util.exception.ErrorMessage.INVALID_WINNING_NUMBER_SIZE;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,7 +27,7 @@ public class LottoValidator {
     private void validateDuplicate(List<Integer> numbers) {
         Set<Integer> unique = new HashSet<>(numbers);
         if (unique.size() != numbers.size()) {
-            throw new IllegalArgumentException(/* DUPLICATE_WINNING_NUMBER.getMessage() */);
+            throw new IllegalArgumentException(DUPLICATE_WINNING_NUMBER.getMessage());
         }
     }
 
@@ -36,7 +39,7 @@ public class LottoValidator {
 
     private void validateSize(List<Integer> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException(/* INVALID_WINNING_NUMBER_SIZE.getMessage() */);
+            throw new IllegalArgumentException(INVALID_WINNING_NUMBER_SIZE.getMessage());
         }
     }
 }
