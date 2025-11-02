@@ -131,6 +131,7 @@
 
 | 예외 상황 | 예외 타입 | 설명 |
 | --- | --- | --- |
+| 구입 금액이 1000원에서 100000원 사이가 아닌 경우 | `IllegalArgumentException` | [ERROR] 로또는 하루 구매 금액 100000입니다. |
 | 구입 금액이 1000원 단위로 나누어지지 않을 경우 | `IllegalArgumentException` | [ERROR] 구입 금액은 1,000원 단위로 입력해야 합니다. |
 | 구입 금액이 숫자가 아닌 경우 | `IllegalArgumentException` | [ERROR] 구입 금액은 숫자여야 합니다. |
 | 구입 금액이 `int`범위를 벗어나는 경우 | `IllegalArgumentException` | [ERROR] 유효하지 않은 금액입니다. |
@@ -138,6 +139,7 @@
 | 당첨 번호가 숫자 + 쉼표 구성이 아닌 경우 | `IllegalArgumentException` | [ERROR] 당첨 번호는 쉼표(,)로 구분된 숫자 형식이어야 합니다. |
 | 당첨 번호가 중복되는 경우 | `IllegalArgumentException` | [ERROR] 당첨 번호는 중복될 수 없습니다. |
 | 당첨 번호가 1~45 사이가 아닌 경우 | `IllegalArgumentException` | [ERROR] 당첨 번호는 1부터 45 사이의 숫자여야 합니다. |
+| 당첨 번호가 6개가 아닌 경우 | `IllegalArgumentException` | [ERROR] 당첨 번호는 6개의 숫자로 구성되어 있어야 합니다. |
 | 보너스 번호가 1~45 사이가 아닌 경우 | `IllegalArgumentException` | [ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다. |
 | 보너스 번호가 기존 당첨 번호와 중복 되는 경우 | `IllegalArgumentException` | [ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다. |
 | 보너스 번호가 숫자가 아닌 경우 | `IllegalArgumentException` | [ERROR] 보너스 번호는 숫자여야 합니다. |
