@@ -1,5 +1,7 @@
 package lotto.util.parser;
 
+import static lotto.util.exception.ErrorMessage.INVALID_NUMBER_FORMAT;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class InputParser {
         try {
             return Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(/* INVALID_RANGE.getMessage() */);
+            throw new IllegalArgumentException(INVALID_NUMBER_FORMAT.getMessage());
         }
     }
 
