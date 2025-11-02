@@ -8,17 +8,17 @@ public class InputView {
     private static final String INPUT_WINNING_NUMBERS_MESSAGE = "당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요.";
 
-    public String inputPurchaseAmount() {
+    public static String inputPurchaseAmount() {
         System.out.println(INPUT_PURCHASE_AMOUNT_MESSAGE);
         return Console.readLine();
     }
 
-    public String inputWinningNumbers() {
+    public static String inputWinningNumbers() {
         System.out.println(INPUT_WINNING_NUMBERS_MESSAGE);
         return Console.readLine();
     }
 
-    public String inputBonusNumber() {
+    public static String inputBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
         return Console.readLine();
     }
