@@ -11,7 +11,6 @@ import lotto.view.OutputView;
 import lotto.view.handler.InputHandler;
 
 public class LottoController {
-
     private final LottoService lottoService;
     private final InputHandler inputHandler;
 
@@ -21,17 +20,27 @@ public class LottoController {
     }
 
     public void run() {
+        handleLottoPurchase();
+    }
+
+    private void handleLottoPurchase() {
+
         PurchaseAmount purchaseAmount = inputHandler.readPurchaseAmount();
-        Lottos lottos = lottoService.purchaseLottos(purchaseAmount);
+        Lottos purchasedLottos = lottoService.purchaseLottos(purchaseAmount);
 
-        OutputView.printPurchasedLottos(purchaseAmount.getLottoCount(), lottos);
+        OutputView.printPurchasedLottos(purchaseAmount.getLottoCount(), purchasedLottos);
 
-        Lotto lotto = inputHandler.readWinningNumbers();
-        LottoNumber lottoNumber = inputHandler.readBonusNumber(lotto);
+        handleWinningResult(purchaseAmount, purchasedLottos);
+    }
 
-        Map<Rank, Long> countRanks = lottoService.calculateRanks(lottos, lotto, lottoNumber);
-        double profit = lottoService.calculateProfitPurchaseAmount(purchaseAmount, countRanks);
+    private void handleWinningResult(PurchaseAmount purchaseAmount, Lottos purchasedLottos) {
 
-        OutputView.printRank(countRanks, profit);
+        Lotto winningLotto = inputHandler.readWinningNumbers();
+        LottoNumber bonusNumber = inputHandler.readBonusNumber(winningLotto);
+
+        Map<Rank, Long> rankCounts = lottoService.calculateRanks(purchasedLottos, winningLotto, bonusNumber);
+        double profitRate = lottoService.calculateProfitPurchaseAmount(purchaseAmount, rankCounts);
+
+        OutputView.printRank(rankCounts, profitRate);
     }
 }
