@@ -1,6 +1,5 @@
 # 로또
 
----
 
 ### 문제 요구 사항
 
@@ -54,7 +53,6 @@
 
 ## 동작 시나리오
 
----
 
 1. 구입 금액 입력 및 검증
     - 사용자가 구입 금액을 입력한다. (예: `"8000"`)
@@ -98,13 +96,52 @@
 
 ## 프로젝트 구조
 
----
 
-![](https://velog.velcdn.com/images/hariaus/post/6ba6c737-47f6-4577-8942-59b167a8fdc1/image.png)
+```
+.
+└── java
+    └── lotto
+        ├── Application.java                    
+        ├── config
+        │   └── LottoConfig.java
+        ├── controller
+        │   └── LottoController.java
+        ├── domain
+        │   ├── factory
+        │   │   ├── LottoFactory.java
+        │   │   ├── LottoNumberFactory.java
+        │   │   └── PurchaseAmountFactory.java
+        │   ├── generator
+        │   │   ├── LottoNumberGenerator.java
+        │   │   └── RandomLottoNumberGenerator.java
+        │   ├── Lotto.java
+        │   ├── LottoNumber.java
+        │   ├── Lottos.java
+        │   ├── PurchaseAmount.java
+        │   └── Rank.java
+        ├── service
+        │   └── LottoService.java
+        ├── util
+        │   ├── exception
+        │   │   └── ErrorMessage.java
+        │   ├── parser
+        │   │   └── InputParser.java
+        │   └── validator
+        │       ├── BonusNumberValidator.java
+        │       ├── InputValidator.java
+        │       ├── LottoNumberValidator.java
+        │       ├── LottoValidator.java
+        │       ├── NumberValidator.java
+        │       └── PurchaseAmountValidator.java
+        └── view
+            ├── handler
+            │   └── InputHandler.java
+            ├── InputView.java
+            └── OutputView.java
+```
 
 ## 기능 요구 사항
 
----
 
 | **카테고리** | **기능** | **설명** |
 | --- | --- | --- |
@@ -127,19 +164,85 @@
 
 ## 예외 처리
 
----
 
 | 예외 상황 | 예외 타입 | 설명 |
 | --- | --- | --- |
-| 구입 금액이 1000원에서 100000원 사이가 아닌 경우 | `IllegalArgumentException` | [ERROR] 로또는 하루 구매 금액 100000입니다. |
-| 구입 금액이 1000원 단위로 나누어지지 않을 경우 | `IllegalArgumentException` | [ERROR] 구입 금액은 1,000원 단위로 입력해야 합니다. |
-| 구입 금액이 숫자가 아닌 경우 | `IllegalArgumentException` | [ERROR] 구입 금액은 숫자여야 합니다. |
-| 구입 금액이 `int`범위를 벗어나는 경우 | `IllegalArgumentException` | [ERROR] 유효하지 않은 금액입니다. |
-| 로또 번호가 1~45 사이가 아닌 경우 | `IllegalArgumentException` | [ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다. |
-| 당첨 번호가 숫자 + 쉼표 구성이 아닌 경우 | `IllegalArgumentException` | [ERROR] 당첨 번호는 쉼표(,)로 구분된 숫자 형식이어야 합니다. |
-| 당첨 번호가 중복되는 경우 | `IllegalArgumentException` | [ERROR] 당첨 번호는 중복될 수 없습니다. |
-| 당첨 번호가 1~45 사이가 아닌 경우 | `IllegalArgumentException` | [ERROR] 당첨 번호는 1부터 45 사이의 숫자여야 합니다. |
-| 당첨 번호가 6개가 아닌 경우 | `IllegalArgumentException` | [ERROR] 당첨 번호는 6개의 숫자로 구성되어 있어야 합니다. |
-| 보너스 번호가 1~45 사이가 아닌 경우 | `IllegalArgumentException` | [ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다. |
-| 보너스 번호가 기존 당첨 번호와 중복 되는 경우 | `IllegalArgumentException` | [ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다. |
-| 보너스 번호가 숫자가 아닌 경우 | `IllegalArgumentException` | [ERROR] 보너스 번호는 숫자여야 합니다. |
+| 구입 금액이 1000원에서 100000원 사이가 아닌 경우 | `IllegalArgumentException` | 로또는 하루 구매 금액 100000입니다. |
+| 구입 금액이 1000원 단위로 나누어지지 않을 경우 | `IllegalArgumentException` | 구입 금액은 1,000원 단위로 입력해야 합니다. |
+| 구입 금액이 숫자가 아닌 경우 | `IllegalArgumentException` | 구입 금액은 숫자여야 합니다. |
+| 구입 금액이 `int`범위를 벗어나는 경우 | `IllegalArgumentException` | 유효하지 않은 금액입니다. |
+| 로또 번호가 1~45 사이가 아닌 경우 | `IllegalArgumentException` | 로또 번호는 1부터 45 사이의 숫자여야 합니다. |
+| 당첨 번호가 숫자 + 쉼표 구성이 아닌 경우 | `IllegalArgumentException` | 당첨 번호는 쉼표(,)로 구분된 숫자 형식이어야 합니다. |
+| 당첨 번호가 중복되는 경우 | `IllegalArgumentException` | 당첨 번호는 중복될 수 없습니다. |
+| 당첨 번호가 1~45 사이가 아닌 경우 | `IllegalArgumentException` | 당첨 번호는 1부터 45 사이의 숫자여야 합니다. |
+| 당첨 번호가 6개가 아닌 경우 | `IllegalArgumentException` | 당첨 번호는 6개의 숫자로 구성되어 있어야 합니다. |
+| 보너스 번호가 1~45 사이가 아닌 경우 | `IllegalArgumentException` | 보너스 번호는 1부터 45 사이의 숫자여야 합니다. |
+| 보너스 번호가 기존 당첨 번호와 중복 되는 경우 | `IllegalArgumentException` | 보너스 번호는 당첨 번호와 중복될 수 없습니다. |
+| 보너스 번호가 숫자가 아닌 경우 | `IllegalArgumentException` | 보너스 번호는 숫자여야 합니다. |
+| 입력이 비어있는 경우 | `IllegalArgumentException` | 입력은 비어있을 수 없습니다.  |
+
+## 💭 생각해 볼 내용
+
+
+> 구현 과정에서 명확한 답을 내리지 못한 부분들입니다.
+> 
+> 
+> 리뷰어분께서 이 부분을 보신다면 의견을 들려주시면 감사하겠습니다 🙏
+> 
+
+---
+
+### 1️⃣ View
+
+이전 코드 리뷰에서 *Getter 최소화 원칙*을 지키려다, 객체 내부에 `toString()`을 구현하는 잘못된 설계를 한 경험이 있음.
+
+이번에는 출력 책임을 `View`로 분리하여, 출력 형식 변경 시 해당 부분만 수정하도록 구조를 개선.
+
+하지만 Spring 개발에서는 항상 `DTO`를 반환했기 때문에 이번에도 `DTO`를 View에 전달했어야  했는지 고민.
+
+> 질문: 출력 데이터가 적은 경우에도 DTO를 도입하는 게 더 바람직할까?
+> 
+
+---
+
+### 2️⃣ Factory
+
+검증이 필요한 객체는 `Factory`를 통해 생성하도록 설계.
+
+다만, “이럴 거면 생성자 내부에서 `validate()`를 호출하는 게 낫지 않을까?”라는 의문이 남음.
+
+> 질문: Factory 도입이 과했을까?
+> 
+
+---
+
+### 3️⃣ Validator
+
+공통 검증 로직을 재사용하기 위해 대부분의 Validator를 **non-static** 으로 구현.
+
+하지만 객체 내부에서 직접 호출할 수 없게 되어 불편함이 있었음.
+
+> 질문: 유틸성 검증 로직은 static으로 관리하는 편이 더 나을까?
+> 
+
+---
+
+### 4️⃣ Stream
+
+`Lotto`와 `Lottos` 클래스에서 **캡슐화 유지를 위해 stream을 제공**.
+
+하지만 결국 내부 데이터를 노출하기 때문에 “이게 getter와 뭐가 다를까?”라는 고민이 남음.
+
+> 질문: `View`에는 `Getter`를 제공해도 괜찮지 않을까?
+> 
+
+---
+
+### 5️⃣ InputHandler
+
+입력값이 유효하지 않을 경우 **재입력을 처리하는 반복 로직**을 `InputHandler`에 구현.
+
+하지만 이 클래스가 입력 반복, 객체 변환까지 모두 담당하게 되어 과도한 역할이 생김.
+
+> 질문: 재입력 로직을 도메인 검증과 분리하면서도 깔끔하게 처리할 방법이 있을까?
+>
