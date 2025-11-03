@@ -4,8 +4,14 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import lotto.config.LottoConfig;
 import lotto.domain.Lotto;
+import lotto.domain.factory.LottoFactory;
+import lotto.domain.factory.LottoNumberFactory;
+import lotto.domain.factory.PurchaseAmountFactory;
+import lotto.util.validator.LottoNumberValidator;
+import lotto.util.validator.LottoValidator;
+import lotto.util.validator.NumberValidator;
+import lotto.util.validator.PurchaseAmountValidator;
 import lotto.view.handler.InputHandler;
 import org.junit.jupiter.api.Test;
 
@@ -13,8 +19,21 @@ class InputHandlerTest extends NsTest {
 
     @Override
     public void runMain() {
-        LottoConfig config = new LottoConfig();
-        InputHandler inputHandler = config.inputHandler();
+        NumberValidator numberValidator = new NumberValidator();
+
+        LottoValidator lottoValidator = new LottoValidator(numberValidator);
+        LottoNumberValidator lottoNumberValidator = new LottoNumberValidator(numberValidator);
+        PurchaseAmountValidator purchaseAmountValidator = new PurchaseAmountValidator(numberValidator);
+
+        LottoNumberFactory lottoNumberFactory = new LottoNumberFactory(lottoNumberValidator);
+        LottoFactory lottoFactory = new LottoFactory(lottoValidator, lottoNumberFactory);
+        PurchaseAmountFactory purchaseAmountFactory = new PurchaseAmountFactory(purchaseAmountValidator);
+
+        InputHandler inputHandler = new InputHandler(
+                purchaseAmountFactory,
+                lottoFactory,
+                lottoNumberFactory
+        );
 
         inputHandler.readPurchaseAmount();
         Lotto lotto = inputHandler.readWinningNumbers();

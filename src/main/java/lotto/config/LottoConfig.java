@@ -19,39 +19,39 @@ public class LottoConfig {
         return new LottoController(lottoService(), inputHandler());
     }
 
-    public InputHandler inputHandler() {
+    private InputHandler inputHandler() {
         return new InputHandler(purchaseAmountFactory(), lottoFactory(), lottoNumberFactory());
     }
 
-    public LottoService lottoService() {
+    private LottoService lottoService() {
         return new LottoService(lottoFactory(), lottoNumberGenerator());
     }
 
-    public LottoNumberGenerator lottoNumberGenerator() {
+    private LottoNumberGenerator lottoNumberGenerator() {
         return new RandomLottoNumberGenerator();
     }
 
-    public LottoFactory lottoFactory() {
+    private LottoFactory lottoFactory() {
         return new LottoFactory(lottoValidator(), lottoNumberFactory());
     }
 
-    public LottoNumberFactory lottoNumberFactory() {
+    private LottoNumberFactory lottoNumberFactory() {
         return new LottoNumberFactory(lottoNumberValidator());
     }
 
-    public LottoValidator lottoValidator() {
+    private LottoValidator lottoValidator() {
         return new LottoValidator(numberValidator());
     }
 
-    public LottoNumberValidator lottoNumberValidator() {
+    private LottoNumberValidator lottoNumberValidator() {
         return new LottoNumberValidator(numberValidator());
     }
 
-    public PurchaseAmountFactory purchaseAmountFactory() {
+    private PurchaseAmountFactory purchaseAmountFactory() {
         return new PurchaseAmountFactory(purchaseAmountValidator());
     }
 
-    public PurchaseAmountValidator purchaseAmountValidator() {
+    private PurchaseAmountValidator purchaseAmountValidator() {
         return new PurchaseAmountValidator(numberValidator());
     }
 
