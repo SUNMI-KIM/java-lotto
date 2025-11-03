@@ -9,6 +9,7 @@ import lotto.domain.factory.LottoNumberFactory;
 import lotto.domain.factory.PurchaseAmountFactory;
 import lotto.util.parser.InputParser;
 import lotto.util.validator.BonusNumberValidator;
+import lotto.util.validator.InputValidator;
 import lotto.view.InputView;
 
 
@@ -30,6 +31,7 @@ public class InputHandler {
         while (true) {
             try {
                 String input = InputView.inputPurchaseAmount();
+                InputValidator.validateNotBlank(input);
                 int amount = InputParser.parseToInt(input);
                 return purchaseAmountFactory.create(amount);
             } catch (IllegalArgumentException e) {
@@ -42,6 +44,7 @@ public class InputHandler {
         while (true) {
             try {
                 String input = InputView.inputWinningNumbers();
+                InputValidator.validateNotBlank(input);
                 List<Integer> numbers = InputParser.parseToIntegerList(input);
                 return lottoFactory.create(numbers);
             } catch (IllegalArgumentException e) {
@@ -54,6 +57,7 @@ public class InputHandler {
         while (true) {
             try {
                 String input = InputView.inputBonusNumber();
+                InputValidator.validateNotBlank(input);
                 int number = InputParser.parseToInt(input);
                 LottoNumber lottoNumber = lottoNumberFactory.create(number);
                 BonusNumberValidator.validate(lotto, lottoNumber);
