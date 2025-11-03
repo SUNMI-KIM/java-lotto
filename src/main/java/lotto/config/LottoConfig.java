@@ -1,6 +1,6 @@
 package lotto.config;
 
-import lotto.domain.controller.LottoController;
+import lotto.controller.LottoController;
 import lotto.domain.factory.LottoFactory;
 import lotto.domain.factory.LottoNumberFactory;
 import lotto.domain.factory.PurchaseAmountFactory;

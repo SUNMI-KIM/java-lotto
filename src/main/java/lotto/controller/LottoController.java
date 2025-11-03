@@ -1,4 +1,4 @@
-package lotto.domain.controller;
+package lotto.controller;
 
 import java.util.Map;
 import lotto.domain.Lotto;
