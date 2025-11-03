@@ -48,8 +48,8 @@ public class LottoService {
     }
 
     public double calculateProfitPurchaseAmount(PurchaseAmount purchaseAmount, Map<Rank, Long> rankCounts) {
-        int totalPrize = rankCounts.entrySet().stream()
-                .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue().intValue())
+        long totalPrize = rankCounts.entrySet().stream()
+                .mapToLong(entry -> (long) entry.getKey().getPrize() * entry.getValue().intValue())
                 .sum();
 
         return (double) totalPrize / purchaseAmount.getPurchaseAmount() * PERCENT;
