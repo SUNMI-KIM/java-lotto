@@ -7,7 +7,7 @@ import java.util.Map;
 import lotto.domain.factory.LottoFactory;
 import lotto.domain.factory.LottoNumberFactory;
 import lotto.domain.generator.LottoNumberGenerator;
-import lotto.domain.service.LottoService;
+import lotto.service.LottoService;
 import lotto.util.validator.LottoNumberValidator;
 import lotto.util.validator.LottoValidator;
 import lotto.util.validator.NumberValidator;
