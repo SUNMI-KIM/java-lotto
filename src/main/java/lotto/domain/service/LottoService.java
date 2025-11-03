@@ -14,6 +14,7 @@ import lotto.domain.generator.LottoNumberGenerator;
 
 public class LottoService {
     private static final int BONUS_MATCH_CONDITION = 5;
+    private static final double PERCENT = 100.0;
 
     private final LottoFactory lottoFactory;
     private final LottoNumberGenerator lottoNumberGenerator;
@@ -40,7 +41,7 @@ public class LottoService {
         return IntStream.range(0, matchCounts.size())
                 .mapToObj(i -> {
                     int matchCount = matchCounts.get(i);
-                    boolean bonusMatch = (matchCount == BONUS_MATCH_CONDITION) && bonusMatches.get(i);
+                    boolean bonusMatch = isBonusMatch(matchCount, bonusMatches.get(i));
                     return Rank.from(matchCount, bonusMatch);
                 })
                 .collect(Collectors.groupingBy(rank -> rank, Collectors.counting()));
@@ -51,6 +52,10 @@ public class LottoService {
                 .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue().intValue())
                 .sum();
 
-        return (double) totalPrize / purchaseAmount.getPurchaseAmount() * 100;
+        return (double) totalPrize / purchaseAmount.getPurchaseAmount() * PERCENT;
+    }
+
+    private boolean isBonusMatch(int matchCount, boolean hasBonus) {
+        return matchCount == BONUS_MATCH_CONDITION && hasBonus;
     }
 }
